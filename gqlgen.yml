@@ -15,3 +15,5 @@ resolver:
 models:
   Ship:
     model: github.com/nasum/go-graphql-sample.Ship
+  Organization:
+    model: github.com/nasum/go-graphql-sample.Organization

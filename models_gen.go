@@ -8,6 +8,11 @@ import (
 	"strconv"
 )
 
+type NewOrganization struct {
+	Name  string     `json:"name"`
+	Ships []*NewShip `json:"ships"`
+}
+
 type NewShip struct {
 	Name     string   `json:"name"`
 	ShipType ShipType `json:"shipType"`

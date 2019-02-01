@@ -7,7 +7,8 @@ import (
 )
 
 type Resolver struct {
-	ships []Ship
+	organizations []Organization
+	ships         []Ship
 }
 
 func (r *Resolver) Mutation() MutationResolver {
@@ -28,9 +29,28 @@ func (r *mutationResolver) CreateShip(ctx context.Context, input NewShip) (Ship,
 	r.ships = append(r.ships, ship)
 	return ship, nil
 }
+func (r *mutationResolver) CreateOrganization(ctx context.Context, input NewOrganization) (Organization, error) {
+	ships := []*Ship{}
+
+	for _, ship := range input.Ships {
+		newShip, _ := r.CreateShip(ctx, *ship)
+		ships = append(ships, &newShip)
+	}
+	organization := Organization{
+		ID:    fmt.Sprintf("T%d", rand.Int()),
+		Name:  input.Name,
+		Ships: ships,
+	}
+	r.organizations = append(r.organizations, organization)
+
+	return organization, nil
+}
 
 type queryResolver struct{ *Resolver }
 
 func (r *queryResolver) Ships(ctx context.Context, name *string, shipType *ShipType) ([]Ship, error) {
 	return r.ships, nil
+}
+func (r *queryResolver) Organizations(ctx context.Context, name *string) ([]Organization, error) {
+	return r.organizations, nil
 }

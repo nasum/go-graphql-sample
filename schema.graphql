@@ -12,8 +12,15 @@ type Ship {
   shipType: ShipType!
 }
 
+type Organization {
+  id: ID!
+  name:String!
+  ships: [Ship]
+}
+
 type Query {
   ships(name: String, shipType: ShipType): [Ship!]!
+  organizations(name: String): [Organization!]!
 }
 
 input NewShip {
@@ -21,6 +28,12 @@ input NewShip {
   shipType: ShipType!
 }
 
+input NewOrganization {
+  name: String!
+  ships: [NewShip]
+}
+
 type Mutation {
   createShip(input: NewShip!): Ship!
+  createOrganization(input: NewOrganization!): Organization!
 }
