@@ -1,0 +1,26 @@
+enum ShipType {
+  BATTLE_SHIP
+  HEAVY_CRUISER
+  LIGHT_CRUISER
+  DESTROYER
+  AIRCRAFT_CARRIER
+}
+
+type Ship {
+  id: ID!
+  name: String!
+  shipType: ShipType!
+}
+
+type Query {
+  ships(name: String, shipType: ShipType): [Ship!]!
+}
+
+input NewShip {
+  name: String!
+  shipType: ShipType!
+}
+
+type Mutation {
+  createShip(input: NewShip!): Ship!
+}
