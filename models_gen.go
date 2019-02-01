@@ -13,12 +13,6 @@ type NewShip struct {
 	ShipType ShipType `json:"shipType"`
 }
 
-type Ship struct {
-	ID       string   `json:"id"`
-	Name     string   `json:"name"`
-	ShipType ShipType `json:"shipType"`
-}
-
 type ShipType string
 
 const (

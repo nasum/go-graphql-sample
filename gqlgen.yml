@@ -12,3 +12,6 @@ model:
 resolver:
   filename: resolver.go
   type: Resolver
+models:
+  Ship:
+    model: github.com/nasum/go-graphql-sample.Ship
